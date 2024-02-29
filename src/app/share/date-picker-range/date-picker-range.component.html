@@ -1,0 +1,70 @@
+<main *ngIf="leftDate && rightDate" class="main">
+  <div class="breakdown">
+    <h2
+      [classList]="['breakdown__h2 ', years ? '' : ' inactive ']"
+      (click)="setYears()"
+    >
+      Years
+    </h2>
+    <h2
+      [classList]="['breakdown__h2 ', years ? ' inactive ' : '']"
+      (click)="setMonths()"
+    >
+      Months
+    </h2>
+  </div>
+  <div class="container">
+    <div class="double-slider">
+      <div class="double-slider__body">
+        <div class="double-slider__track">
+          <div #sliderRange class="double-slider__range"></div>
+          <div
+            #dotLeft
+            class="double-slider__dot double-slider__dot--left tooltip"
+          >
+            <span #titleMin class="tooltiptext">{{
+              getTooltipString("left")
+            }}</span>
+          </div>
+          <div
+            #dotRight
+            class="double-slider__dot double-slider__dot--right tooltip"
+          >
+            <span #titleMax class="tooltiptext">{{
+              getTooltipString("right")
+            }}</span>
+          </div>
+        </div>
+        <input
+          #inputLeft
+          type="range"
+          [min]="leftDateAfterSetMonth || leftDate"
+          [max]="rightDateAfterSetMonth || rightDate"
+          [value]="leftDateAfterSetMonth || leftDate"
+          class="double-slider__input"
+          (input)="setLeftValue($event)"
+        />
+        <input
+          #inputRight
+          type="range"
+          [min]="leftDateAfterSetMonth || leftDate"
+          [max]="rightDateAfterSetMonth || rightDate"
+          [value]="rightDateAfterSetMonth || rightDate"
+          class="double-slider__input"
+          (input)="setRightValue($event)"
+        />
+      </div>
+    </div>
+    <div class="bottom overflow-scroll" *ngIf="!allMonths.length">
+      <h3 *ngFor="let year of allYears">{{ year }}</h3>
+    </div>
+    <div class="bottom overflow-scroll" *ngIf="allMonths.length">
+      <h3 *ngFor="let year of allMonths">{{ year }}</h3>
+    </div>
+  </div>
+</main>
+<main *ngIf="!this.leftDate || !this.rightDate" class="main">
+  <h2 class="breakdown__h2">
+    Error. Please provide "leftDate" and "rightDate" to "DatePickerRange"
+  </h2>
+</main>
