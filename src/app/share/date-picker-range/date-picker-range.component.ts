@@ -109,6 +109,17 @@ export class DatePickerRangeComponent implements OnInit {
   getAllMonthsAccordingWidth(): void {
     if (this.years) return;
     if (window.innerWidth > 1200) {
+      console.log(this.allMonths.length);
+      if (this.allMonths.length > 25) {
+        console.log('HALO');
+        this.allMonthsAfterResize = this.allMonths.filter((month, i) => {
+          if (!i) return month;
+          if (i === this.allMonths.length - 1) return month;
+          if (i % 2 === 0) return month;
+          return;
+        });
+        return;
+      }
       this.allMonthsAfterResize = this.allMonths;
       return;
     }
@@ -227,7 +238,6 @@ export class DatePickerRangeComponent implements OnInit {
         new Date(currentRightDate - currentLeftDate).getFullYear() - 1970 >=
         3
       ) {
-        console.log('HALLO');
         currentRightDate = new Date(currentLeftDate).setFullYear(
           new Date(currentLeftDate).getFullYear() + 2
         );
