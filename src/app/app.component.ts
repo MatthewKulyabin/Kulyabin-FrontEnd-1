@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  leftDate: number = new Date(2001, 0, 1).getTime();
+  leftDate: number = new Date(2010, 0, 1).getTime();
   rightDate: number = new Date().getTime();
 }

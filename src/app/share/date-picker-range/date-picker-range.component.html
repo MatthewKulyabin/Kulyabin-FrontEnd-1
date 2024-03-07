@@ -22,17 +22,23 @@
             #dotLeft
             class="double-slider__dot double-slider__dot--left tooltip"
           >
-            <span #titleMin class="tooltiptext">{{
-              getTooltipString("left")
-            }}</span>
+            <span #titleMin class="tooltiptext" *ngIf="leftDateAfterSetMonth">
+              {{ leftDateAfterSetMonth | date : "MMMM yyyy" }}
+            </span>
+            <span #titleMin class="tooltiptext" *ngIf="!leftDateAfterSetMonth">
+              {{ leftDate | date : "MMMM yyyy" }}
+            </span>
           </div>
           <div
             #dotRight
             class="double-slider__dot double-slider__dot--right tooltip"
           >
-            <span #titleMax class="tooltiptext">{{
-              getTooltipString("right")
-            }}</span>
+            <span #titleMax class="tooltiptext" *ngIf="rightDateAfterSetMonth">
+              {{ rightDateAfterSetMonth | date : "MMMM yyyy" }}
+            </span>
+            <span #titleMax class="tooltiptext" *ngIf="!rightDateAfterSetMonth">
+              {{ rightDate | date : "MMMM yyyy" }}
+            </span>
           </div>
         </div>
         <input
@@ -55,11 +61,11 @@
         />
       </div>
     </div>
-    <div class="bottom overflow-scroll" *ngIf="!allMonths.length">
+    <div class="bottom overflow-scroll" *ngIf="!allMonthsAfterResize.length">
       <h3 *ngFor="let year of allYears">{{ year }}</h3>
     </div>
-    <div class="bottom overflow-scroll" *ngIf="allMonths.length">
-      <h3 *ngFor="let year of allMonths">{{ year }}</h3>
+    <div class="bottom overflow-scroll" *ngIf="allMonthsAfterResize.length">
+      <h3 *ngFor="let year of allMonthsAfterResize">{{ year }}</h3>
     </div>
   </div>
 </main>
